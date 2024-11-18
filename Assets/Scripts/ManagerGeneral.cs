@@ -23,7 +23,7 @@ public class ManagerGeneral : MonoBehaviour
     [SerializeField]
     float menuFinalYPositionOnHide = -67f;
     [SerializeField]
-    float menuFinalXPosition = -800f;
+    float menuFinalXPosition = -925f;
     [SerializeField]
     float objectsFinalXPositionOnShow = 825f;
     [SerializeField]
@@ -48,5 +48,11 @@ public class ManagerGeneral : MonoBehaviour
     {
         LeanTween.moveLocalX(popupObjects, objectsFinalXPositionOnShow, durationAnim).setEase(animCurve);
         LeanTween.moveLocalX(popupMenu, menuFinalXPosition, durationAnim).setEase(animCurve);
+    }
+
+    public void MenusDeactivation()
+    {
+        LeanTween.moveLocalX(popupObjects, objectsFinalXPositionOnHide, durationAnim).setEase(animCurve);
+        MenuPopupDeactivation();
     }
 }
