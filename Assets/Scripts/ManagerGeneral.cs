@@ -16,23 +16,19 @@ public class ManagerGeneral : MonoBehaviour
     GameObject popupMenuShowButton;
     [SerializeField]
     GameObject popupMenuHideButton;
-    [SerializeField]
     float durationAnim = 0.25f;
-    [SerializeField]
     float menuFinalYPositionOnShow = 110f;
-    [SerializeField]
     float menuFinalYPositionOnHide = -67f;
-    [SerializeField]
     float menuFinalXPosition = -925f;
-    [SerializeField]
     float objectsFinalXPositionOnShow = 825f;
-    [SerializeField]
-    float objectsFinalXPositionOnHide = 0f;
+    float objectsFinalXPositionOnHide = 1075f;
+    public ObjectMover objectMover;
 
-   
+
 
     public void MenuPopupActivation()
     {
+        popupMenu.SetActive(true);
         popupMenuHideButton.SetActive(true);
         LeanTween.moveLocalY(popupMenu, menuFinalYPositionOnShow, durationAnim).setEase(animCurve);
         popupMenuShowButton.SetActive(false);
@@ -50,9 +46,16 @@ public class ManagerGeneral : MonoBehaviour
         LeanTween.moveLocalX(popupMenu, menuFinalXPosition, durationAnim).setEase(animCurve);
     }
 
+    public void MoveButton()
+    {
+        MenusDeactivation();
+        objectMover.MovingObject();
+    }
+
     public void MenusDeactivation()
     {
         LeanTween.moveLocalX(popupObjects, objectsFinalXPositionOnHide, durationAnim).setEase(animCurve);
         MenuPopupDeactivation();
+        popupMenu.SetActive(false);
     }
 }

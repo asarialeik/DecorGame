@@ -14,12 +14,14 @@ public class ObjectCreator : MonoBehaviour
     {
         if (positioning == true)
         {
+            objetoCreado.SetActive(false);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
                 objetoCreado.transform.position = hit.point;
             }
+            objetoCreado.SetActive(true);
 
             if (Input.GetMouseButtonDown(0))
             {

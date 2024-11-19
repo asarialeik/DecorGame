@@ -2191,6 +2191,7 @@ GameObject:
   - component: {fileID: 679810137}
   - component: {fileID: 679810139}
   - component: {fileID: 679810138}
+  - component: {fileID: 679810140}
   m_Layer: 5
   m_Name: MoveText
   m_TagString: Untagged
@@ -2314,6 +2315,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679810136}
   m_CullTransparentMesh: 1
+--- !u!114 &679810140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679810136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bfcdf85a52ab9545ba8de0823a65f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &690615122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,12 +2494,6 @@ MonoBehaviour:
   popupObjects: {fileID: 1353259296}
   popupMenuShowButton: {fileID: 157639860}
   popupMenuHideButton: {fileID: 143212179}
-  durationAnim: 0.25
-  menuFinalYPositionOnShow: 110
-  menuFinalYPositionOnHide: -67
-  menuFinalXPosition: -925
-  objectsFinalXPositionOnShow: 825
-  objectsFinalXPositionOnHide: 1075
 --- !u!4 &727583697
 Transform:
   m_ObjectHideFlags: 0
