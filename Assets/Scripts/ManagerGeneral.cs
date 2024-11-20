@@ -23,6 +23,8 @@ public class ManagerGeneral : MonoBehaviour
     float objectsFinalXPositionOnShow = 825f;
     float objectsFinalXPositionOnHide = 1075f;
     public ObjectMover objectMover;
+    public ObjectRotator objectRotator;
+    public ObjectDeleter objectDeleter;
 
 
 
@@ -49,7 +51,19 @@ public class ManagerGeneral : MonoBehaviour
     public void MoveButton()
     {
         MenusDeactivation();
-        objectMover.MovingObject();
+        objectMover.tryingToMoveObject = true;
+    }
+
+    public void RotateButton()
+    {
+        MenusDeactivation();
+        objectRotator.tryingToRotateObject = true;
+    }
+
+    public void DeleteButton()
+    {
+        MenusDeactivation();
+        objectDeleter.tryingToDeleteObject = true;
     }
 
     public void MenusDeactivation()

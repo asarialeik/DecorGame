@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    [SerializeField]
-    bool tryingToMoveObject = false;
+    public bool tryingToMoveObject = false;
     bool objectMoving = false;
-    [SerializeField]
-    GameObject objectInMovement;
+    GameObject objectInSelection;
     public ManagerGeneral managerGeneral;
 
     void Update()
@@ -21,37 +19,31 @@ public class ObjectMover : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    objectInMovement = hit.collider.gameObject;
-                    objectMoving = true;
-                    tryingToMoveObject = false;
+                    objectInSelection = hit.collider.gameObject;
+                    if (objectInSelection.tag == "Assets")
+                    {
+                        objectMoving = true;
+                        tryingToMoveObject = false;
+                    }
                 }
             }
         }
-
-        if (objectMoving == true)
+        else if (objectMoving == true)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            objectInSelection.SetActive(false);
             if (Physics.Raycast(ray, out hit))
             {
-                objectInMovement.SetActive(false);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    objectInMovement.transform.position = hit.point;
-                }
-                objectInMovement.SetActive(true);
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                    objectMoving = false;
-                    managerGeneral.MenuPopupActivation();
-                }
+                objectInSelection.transform.position = hit.point;
+            }
+            objectInSelection.SetActive(true);
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                objectMoving = false;
+                managerGeneral.MenuPopupActivation();
             }
         }
-    }
-
-    public void MovingObject()
-    {
-        tryingToMoveObject = true;
     }
 }
