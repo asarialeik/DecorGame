@@ -7,6 +7,8 @@ public class ObjectMover : MonoBehaviour
     public bool tryingToMoveObject = false;
     bool objectMoving = false;
     GameObject objectInSelection;
+    [SerializeField]
+    GameObject circle;
     public ManagerGeneral managerGeneral;
 
     void Update()
@@ -17,10 +19,13 @@ public class ObjectMover : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (Input.GetMouseButtonDown(0))
+                objectInSelection = hit.collider.gameObject;
+                if (objectInSelection.tag == "Assets")
                 {
-                    objectInSelection = hit.collider.gameObject;
-                    if (objectInSelection.tag == "Assets")
+                    circle.SetActive(true);
+                    circle.transform.parent = objectInSelection.transform;
+                    circle.transform.position = objectInSelection.transform.position;
+                    if (Input.GetMouseButtonDown(0))
                     {
                         objectMoving = true;
                         tryingToMoveObject = false;
@@ -42,6 +47,7 @@ public class ObjectMover : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 objectMoving = false;
+                circle.SetActive(false);
                 managerGeneral.MenuPopupActivation();
             }
         }

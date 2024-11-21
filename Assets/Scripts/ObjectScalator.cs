@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectRotator : MonoBehaviour
+public class ObjectScalator : MonoBehaviour
 {
-    public bool tryingToRotateObject = false;
-    bool objectInRotation = false;
+    public bool tryingToScalateObject = false;
+    bool objectInScalation = false;
     GameObject objectInSelection;
     [SerializeField]
     GameObject circle;
     public ManagerGeneral managerGeneral;
+    float number = 30;
+    float punto0;
+    float aSumar;
 
     void Update()
     {
-        if (tryingToRotateObject == true)
+        if (tryingToScalateObject == true)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -27,34 +30,38 @@ public class ObjectRotator : MonoBehaviour
                     circle.transform.position = objectInSelection.transform.position;
                     if (Input.GetMouseButtonDown(0))
                     {
-                        tryingToRotateObject = false;
-                        objectInRotation = true;
+                        punto0 = Input.mousePosition.y;
+                        tryingToScalateObject = false;
+                        objectInScalation = true;
                     }
                 }
             }
         }
-        else if (objectInRotation == true)
+        else if (objectInScalation == true)
         {
-            ObjectRotation();
+            ObjectScalation();
         }
     }
 
-    void ObjectRotation()
+    void ObjectScalation()
     {
         /// Moves clockwise
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        /// //Input.MousePosition
+        /*if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            objectInSelection.transform.Rotate(Vector3.up, -5f);
+            LeanTween.scale(objectInSelection, objectInSelection.transform.localScale + Vector3.one/number, 0.25f);
         }
         ///Moves anticlockwise
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            objectInSelection.transform.Rotate(Vector3.up, 5f);
-        }
-        
+            LeanTween.scale(objectInSelection, objectInSelection.transform.localScale - Vector3.one/ number, 0.25f);
+        }*/
+        aSumar = Input.mousePosition.y - punto0;
+        LeanTween.scale(objectInSelection, objectInSelection.transform.localScale + (Vector3.one * aSumar) / 1000, 0.25f);
+
         if (Input.GetMouseButtonDown(0))
         {
-            objectInRotation = false;
+            objectInScalation = false;
             circle.SetActive(false);
             managerGeneral.MenuPopupActivation();
         }

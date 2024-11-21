@@ -7,6 +7,8 @@ public class ObjectCreator : MonoBehaviour
     [SerializeField]
     GameObject objetoACrear;
     GameObject objetoCreado;
+    [SerializeField]
+    GameObject circle;
     public ManagerGeneral managerGeneral;
     bool positioning = false;
 
@@ -26,6 +28,7 @@ public class ObjectCreator : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 positioning = false;
+                circle.SetActive(false);
                 managerGeneral.MenuPopupActivation();
             }
         }
@@ -35,6 +38,9 @@ public class ObjectCreator : MonoBehaviour
     {
         objetoACrear.SetActive(true);
         objetoCreado = Instantiate(objetoACrear, Vector3.zero, Quaternion.identity);
+        circle.SetActive(true);
+        circle.transform.parent = objetoCreado.transform;
+        circle.transform.position = objetoCreado.transform.position;
         positioning = true;
     }
 }

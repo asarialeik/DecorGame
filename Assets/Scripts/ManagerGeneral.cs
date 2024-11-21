@@ -9,6 +9,8 @@ public class ManagerGeneral : MonoBehaviour
     [SerializeField]
     LeanTweenType animCurve;
     [SerializeField]
+    LeanTweenType animCurveCircle;
+    [SerializeField]
     GameObject popupMenu;
     [SerializeField]
     GameObject popupObjects;
@@ -16,6 +18,8 @@ public class ManagerGeneral : MonoBehaviour
     GameObject popupMenuShowButton;
     [SerializeField]
     GameObject popupMenuHideButton;
+    [SerializeField]
+    GameObject circle;
     float durationAnim = 0.25f;
     float menuFinalYPositionOnShow = 110f;
     float menuFinalYPositionOnHide = -67f;
@@ -24,10 +28,20 @@ public class ManagerGeneral : MonoBehaviour
     float objectsFinalXPositionOnHide = 1075f;
     public ObjectMover objectMover;
     public ObjectRotator objectRotator;
+    public ObjectScalator objectScalator;
     public ObjectDeleter objectDeleter;
 
+    private void Start()
+    {
+        LeanTween.scaleX(circle, 5f, 1f).setEase(animCurveCircle).setOnComplete(TweenFinished).setLoopPingPong();
+        LeanTween.scaleZ(circle, 5f, 1f).setEase(animCurveCircle).setOnComplete(TweenFinished).setLoopPingPong();
+    }
 
-
+    private void TweenFinished()
+    {
+        LeanTween.scaleX(circle, -4f, 1f).setEase(animCurveCircle);
+        LeanTween.scaleZ(circle, -4f, 1f).setEase(animCurveCircle);
+    }
     public void MenuPopupActivation()
     {
         popupMenu.SetActive(true);
@@ -58,6 +72,12 @@ public class ManagerGeneral : MonoBehaviour
     {
         MenusDeactivation();
         objectRotator.tryingToRotateObject = true;
+    }
+
+    public void ScaleButton()
+    {
+        MenusDeactivation();
+        objectScalator.tryingToScalateObject = true;
     }
 
     public void DeleteButton()

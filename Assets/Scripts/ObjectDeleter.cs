@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class ObjectDeleter : MonoBehaviour
 {
     public bool tryingToDeleteObject = false;
     GameObject objectInSelection;
+    [SerializeField]
+    GameObject circle;
     public ManagerGeneral managerGeneral;
 
     void Update()
@@ -16,12 +19,16 @@ public class ObjectDeleter : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (Input.GetMouseButtonDown(0))
+                objectInSelection = hit.collider.gameObject;
+                if (objectInSelection.tag == "Assets")
                 {
-                    objectInSelection = hit.collider.gameObject;
-                    if (objectInSelection.tag == "Assets")
+                    circle.SetActive(true);
+                    circle.transform.parent = objectInSelection.transform;
+                    circle.transform.position = objectInSelection.transform.position;
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        objectInSelection.SetActive(false);
+                        Destroy (objectInSelection);
+                        circle.SetActive(false);
                         managerGeneral.MenuPopupActivation();
                     }
                 }
